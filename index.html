@@ -9,88 +9,96 @@
     />
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
+
   <body>
-    <div id="datepicker"></div>
-      <div class="test time-slot-wrapper" style="">
-        <div class="display-date-time">
-          <span class="selected-date"></span> 
-          <span class="selected-time"></span>
+    <div class="date-picker-wrapper">
+      <div class="date-picker">
+        <div id="datepicker"></div>
+        <div class="test time-slot-wrapper popup">
+          <div class="display-date-time">
+            <span class="selected-date"></span>
+            <span class="selected-time"></span>
+          </div>
+          <div class="time-slot">
+            <div>
+              <div class="slot" data-time="10:00 - 10:30">10:00 - 10:30</div>
+              <div class="slot" data-time="11:00 - 11:30">11:00 - 11:30</div>
+              <div class="slot" data-time="12:00 - 12:30">12:00 - 12:30</div>
+              <div class="slot" data-time="01:00 - 01:30">01:00 - 01:30</div>
+              <div class="slot" data-time="02:00 - 02:30">02:00 - 02:30</div>
+              <div class="slot" data-time="03:00 - 03:30">03:00 - 03:30</div>
+            </div>
+            <div>
+              <div class="slot" data-time="10:30 - 11:00">10:30 - 11:00</div>
+              <div class="slot" data-time="11:30 - 12:00">11:30 - 12:00</div>
+              <div class="slot" data-time="12:30 - 01:00">12:30 - 01:00</div>
+              <div class="slot" data-time="01:30 - 02:00">01:30 - 02:00</div>
+              <div class="slot" data-time="02:30 - 03:00">02:30 - 03:00</div>
+              <div class="slot" data-time="03:30 - 04:00">03:30 - 04:00</div>
+            </div>
+          </div>
         </div>
-        <div class="time-slot">
-        <div>
-          <div class="slot" data-time="10:00 - 10:30">10:00 - 10:30</div>
-          <div class="slot" data-time="11:00 - 11:30">11:00 - 11:30</div>
-          <div class="slot" data-time="12:00 - 12:30">12:00 - 12:30</div>
-          <div class="slot" data-time="01:00 - 01:30">01:00 - 01:30</div>
-          <div class="slot" data-time="02:00 - 02:30">02:00 - 02:30</div>
-          <div class="slot" data-time="03:00 - 03:30">03:00 - 03:30</div>
-        </div>
-        <div>
-          <div class="slot" data-time="10:30 - 11:00">10:30 - 11:00</div>
-          <div class="slot" data-time="11:30 - 12:00">11:30 - 12:00</div>
-          <div class="slot" data-time="12:30 - 01:00">12:30 - 01:00</div>
-          <div class="slot" data-time="01:30 - 02:00">01:30 - 02:00</div>
-          <div class="slot" data-time="02:30 - 03:00">02:30 - 03:00</div>
-          <div class="slot" data-time="03:30 - 04:00">03:30 - 04:00</div>
-        </div>
-        </div>
-    </div>
       </div>
     </div>
     <style>
+      .montserrat {
+        font-family: "Montserrat", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+      }
+      .date-picker-wrapper {
+        width: 730px;
+        margin: 100px auto;
+        position: relative;
+      }
+      .date-picker {
+        display: flex;
+      }
+      .ui-datepicker-month,
+      .ui-datepicker-year {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+      }
 
-.montserrat {
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-.ui-datepicker-month, .ui-datepicker-year{
-            font-family: "Montserrat", sans-serif;
-            font-weight: 500;
-            font-size: 16px;
+      .ui-datepicker-calendar {
+        font-family: "Montserrat", sans-serif !important;
+        font-weight: 500 !important;
+        font-size: 14px !important;
+      }
 
-}
-.ui-datepicker-prev:hover,
-.ui-datepicker-next:hover {
-    background: none !important;  /* Remove the background on hover */
-    border: none !important;      /* Remove any border on hover */
-}
-.ui-datepicker-calendar{
-            font-family: "Montserrat", sans-serif !important;
-            font-weight: 500 !important;
-            font-size: 14px !important;
-}
-        .display-date-time{
-            position: absolute;
-            font-family: "Montserrat", sans-serif;
-            top:-150px;
-            left: 10%;
-            font-weight: 500;
-            font-size: 16px;
-            color:#0F1316;
-        }
-        .selected-date{
-            margin-right: 10px;
-        }
-        .time-slot-wrapper {
-        align-items: center;
-        width: 365px;
+      .display-date-time {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        color: #0f1316;
+        display: flex;
+      }
+
+      .selected-date {
+        margin-right: 10px;
         margin-bottom: 10px;
-        cursor: pointer;
-        position: absolute;
-        top: 285px;
-        right: 400px;
-        }
+        display: block;
+      }
+
+      .time-slot-wrapper {
+        margin-left: 35px;
+        margin-top: 45px;
+      }
+
       .time-slot {
         display: flex;
-        justify-content: center;
         align-items: center;
-        height: 50px;
+        cursor: pointer;
       }
+
       .slot {
         font-family: "Montserrat", sans-serif;
         font-weight: 400;
@@ -98,120 +106,145 @@
         width: 120px;
         height: 42px;
         background: #f3f3f3;
-        color: #3C3C3C;
+        color: #3c3c3c;
         text-align: center;
         line-height: 38px;
         border-radius: 5px;
         margin-right: 10px;
         margin-top: 5px;
       }
+
       .active {
         background: #1d334e;
         color: #ffffff;
       }
+
       .ui-widget.ui-widget-content {
         border: none;
-        width: 100%;
-        margin: 150px auto;
       }
+
       .ui-datepicker {
         width: 365px !important;
         height: 400px !important;
       }
+
       .ui-widget-header {
         background: none !important;
         border: none !important;
       }
+
       .ui-datepicker-next span,
       .ui-datepicker-prev span {
         display: none !important;
       }
-      .ui-datepicker-prev {
+
+      .ui-datepicker-prev,
+      .ui-datepicker-prev:hover {
         background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNiIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDYgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik01IDlMMS43MDcxMSA1LjcwNzExQzEuMzczNzcgNS4zNzM3NyAxLjIwNzExIDUuMjA3MTEgMS4yMDcxMSA1QzEuMjA3MTEgNC43OTI4OSAxLjM3Mzc3IDQuNjI2MjMgMS43MDcxMSA0LjI5Mjg5TDUgMSIgc3Ryb2tlPSIjNzg4NTkxIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=")
           no-repeat center center;
-        width: 20px; /* Adjust to match your icon size */
-        height: 20px; /* Adjust to match your icon size */
-        text-indent: -9999px; /* Hides the default text */
       }
 
-      .ui-datepicker-next, .ui-datepicker-next:hover {
+      .ui-datepicker-next,
+      .ui-datepicker-next:hover {
         background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNiIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDYgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xIDlMNC4yOTI4OSA1LjcwNzExQzQuNjI2MjMgNS4zNzM3NyA0Ljc5Mjg5IDUuMjA3MTEgNC43OTI4OSA1QzQuNzkyODkgNC43OTI4OSA0LjYyNjIzIDQuNjI2MjMgNC4yOTI4OSA0LjI5Mjg5TDEgMSIgc3Ryb2tlPSIjNzg4NTkxIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=")
           no-repeat center center;
       }
+
       .ui-datepicker td span,
       .ui-datepicker td a {
         width: 42px !important;
         height: 42px !important;
         display: flex;
-        justify-content: center; /* Centers horizontally */
-        align-items: center; /* Centers vertically */
+        justify-content: center;
+        /* Centers horizontally */
+        align-items: center;
+        /* Centers vertically */
         border-radius: 4px;
         margin: 2px;
       }
+
       .ui-datepicker td a {
         background: #f3f3f3 !important;
         border: none !important;
         color: #3c3c3c !important;
       }
+
       .ui-datepicker td span {
         background: none !important;
         border: none !important;
         color: #999999 !important;
       }
+
       .booked span {
         color: #3c3c3c;
       }
+
       .ui-datepicker-calendar tbody tr td {
         border-radius: 5px !important;
       }
+
       .ui-datepicker-current-day .ui-state-active {
         background: #1d334e !important;
         color: #ffffff !important;
       }
+
       .ui-state-hover {
-        background: none !important;
         border: none !important;
         color: #788591 !important;
         cursor: pointer;
       }
+      @media (max-width: 768px) {
+        .time-slot-wrapper {
+          display: none;
+          background: red;
+        }
+        .date-picker {
+          display: flex;
+          justify-content: center;
+        }
+        .ui-datepicker {
+          width: 500px !important;
+        }
+        .popup{
+          position: absolute !important;
+          top: 20px;
+        }
+      }
     </style>
     <script>
-        $(".ui-datepicker-next").on("mouseenter", function(){
-           $(".ui-datepicker-next").removeClass('ui-datepicker-next-hover ui-state-hover');
-        });
       $(".selected-date").text(getFormattedDate());
-      $(".slot").on("click", function(e) {
-                                 $(".slot").removeClass("active");
-                                 $(this).addClass("active");
-          let date = $(this).data("time");
-          $(".selected-time").empty();
-          $(".selected-time").text(date);
-          console.log(date);
+      $(".slot").on("click", function (e) {
+        $(".slot").removeClass("active");
+        $(this).addClass("active");
+        let date = $(this).data("time");
+        $(".selected-time").empty();
+        $(".selected-time").text(date);
+        console.log(date);
       });
       $("#datepicker").datepicker({
-        onSelect: function(dateText) {
-                    console.log("Selected date: " + dateText);
-                   let date_format = getFormattedDate(dateText);
-                    $(".selected-date").empty();
-                    $(".selected-date").text(date_format);
-                },
+        onSelect: function (dateText) {
+          console.log("Selected date: " + dateText);
+          let date_format = getFormattedDate(dateText);
+          $(".selected-date").empty();
+          $(".selected-date").text(date_format);
+       //   $(".time-slot-wrapper").dialog();
+        },
         firstDay: 1,
         showOtherMonths: true,
         dayNamesMin: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"],
-        prevText: "", // Set this to empty or any custom text
+        prevText: "",
         nextText: "",
         beforeShowDay: function (date) {
-          var bookedDates = ["2024-09-12", "2024-09-10"]; // Example booked dates
+          var bookedDates = ["2024-09-12", "2024-09-10"];
           var formattedDate = $.datepicker.formatDate("yy-mm-dd", date);
 
           if (bookedDates.indexOf(formattedDate) !== -1) {
-            return [false, "booked", "This date is booked"]; // Disable and mark booked dates
+            return [false, "booked", "This date is booked"];
           }
-          return [true]; // Enable other dates
+          return [true];
         },
       });
       function getFormattedDate(dateString = null) {
-        //const date = new Date();
         const date = dateString ? new Date(dateString) : new Date();
 
         const dayNames = [
