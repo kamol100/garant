@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <title>datepicker demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link
       rel="stylesheet"
       href="https://code.jquery.com/ui/1.13.3/themes/smoothness/jquery-ui.css"
@@ -196,7 +198,8 @@
       @media (max-width: 768px) {
         .time-slot-wrapper {
           display: none;
-          background: red;
+          background: white !important;
+          top: -49px;
         }
         .date-picker {
           display: flex;
@@ -205,9 +208,13 @@
         .ui-datepicker {
           width: 500px !important;
         }
-        .popup{
-          position: absolute !important;
-          top: 20px;
+        .popup {
+          width: 500px !important;
+        }
+        .slot {
+          width: 250px;
+          height: 50px;
+          line-height: 50px;
         }
       }
     </style>
@@ -227,7 +234,18 @@
           let date_format = getFormattedDate(dateText);
           $(".selected-date").empty();
           $(".selected-date").text(date_format);
-       //   $(".time-slot-wrapper").dialog();
+          if ($(window).width() < 768) {
+            $(".time-slot-wrapper").dialog({
+              show: {
+                effect: "blind",
+                duration: 1000,
+              },
+              hide: {
+                effect: "explode",
+                duration: 1000,
+              },
+            });
+          }
         },
         firstDay: 1,
         showOtherMonths: true,
