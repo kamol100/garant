@@ -1,229 +1,264 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
-    <!-- title -->
-    <title>kronos Date Picker Plugin Examples</title>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>datepicker demo</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.3/themes/smoothness/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="datepicker"></div>
+      <div class="test time-slot-wrapper" style="">
+        <div class="display-date-time">
+          <span class="selected-date"></span> 
+          <span class="selected-time"></span>
+        </div>
+        <div class="time-slot">
+        <div>
+          <div class="slot" data-time="10:00 - 10:30">10:00 - 10:30</div>
+          <div class="slot" data-time="11:00 - 11:30">11:00 - 11:30</div>
+          <div class="slot" data-time="12:00 - 12:30">12:00 - 12:30</div>
+          <div class="slot" data-time="01:00 - 01:30">01:00 - 01:30</div>
+          <div class="slot" data-time="02:00 - 02:30">02:00 - 02:30</div>
+          <div class="slot" data-time="03:00 - 03:30">03:00 - 03:30</div>
+        </div>
+        <div>
+          <div class="slot" data-time="10:30 - 11:00">10:30 - 11:00</div>
+          <div class="slot" data-time="11:30 - 12:00">11:30 - 12:00</div>
+          <div class="slot" data-time="12:30 - 01:00">12:30 - 01:00</div>
+          <div class="slot" data-time="01:30 - 02:00">01:30 - 02:00</div>
+          <div class="slot" data-time="02:30 - 03:00">02:30 - 03:00</div>
+          <div class="slot" data-time="03:30 - 04:00">03:30 - 04:00</div>
+        </div>
+        </div>
+    </div>
+      </div>
+    </div>
+    <style>
 
-
-    <!-- css -->
-    <link rel="stylesheet" href="kronos.css"></link>
-
-    <!-- js -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
-    <script src="kronos.js"></script>
-</head>
-<body>
-<style>
-
-* {box-sizing: border-box; margin: 0; padding: 0; font-family: inherit; font-style: normal; font-weight: inherit; font-size: inherit; line-height: inherit; text-decoration: inherit; color: inherit; vertical-align: top; outline: none;}
-
-html {width: 100%; height: 100%; -ms-touch-action: manipulation; touch-action: manipulation;}
-body {width: 100%; height: 100%; font-family: 'Quicksand'; font-weight: 400; font-size: 17px; line-height: 1.5; color: #666666; -webkit-font-smoothing: antialiased; /*font-smoothing: antialiased;*/ -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-text-size-adjust: 100%; -webkit-print-color-adjust: exact;}
-
-table {width: 100%; border-spacing: 0; table-layout: fixed;}
-
-td, th {vertical-align: middle;}
-
-#outer {overflow: hidden; position: relative; width: 100%; min-height: 100vh; padding: 50px; background: #eeeeee;}
-
-#inner {max-width: 1100px; padding: 100px 100px; margin: 0 auto; background: #ffffff;}
-#inner h1 {margin: 0 0 100px; font-weight: 700; font-size: 40px; color: #000000;}
-#inner h2 {margin: 0 0 20px; font-weight: 700; font-size: 24px; color: #000000;}
-#inner .greeting {margin: 0 0 100px;}
-#inner .greeting .txt strong {font-weight: 400; color: #000000;}
-#inner .greeting .link {display: inline-block; margin: 10px 0 0; color: #1d86dc;}
-
-#inner .options {margin: 0 0 100px;}
-#inner .options table thead tr th {padding: 15px; color: #000000; text-align: center; background: #f7f7f7;}
-#inner .options table tbody tr td {padding: 15px; text-align: center; border-bottom: 1px solid #dddddd;}
-#inner .options table tbody tr td:nth-child(3) {text-align: left;}
-#inner .options table tbody tr td a {color: #569cd6;}
-
-#inner .methods {margin: 0 0 100px;}
-#inner .methods table thead tr th {padding: 15px; color: #000000; text-align: center; background: #f7f7f7;}
-#inner .methods table tbody tr td {padding: 15px; text-align: center; border-bottom: 1px solid #dddddd;}
-#inner .methods table tbody tr td a {color: #569cd6;}
-
-#inner .demowrap {margin: 0 0 100px;}
-#inner .demowrap .demo {width: 800px; margin: 0 auto 100px;}
-#inner .demowrap .demo:last-child {margin-bottom: 0;}
-#inner .demowrap .demo .desc {margin: 0 0 20px;}
-#inner .demowrap .demo .desc .tit {color: #000000;}
-#inner .demowrap .demo .desc .txt {margin: 10px 0 0;}
-#inner .demowrap .demo .source {margin: 30px 0 0; padding: 25px; border-radius: 15px; background: #1e1e1e; font-family: NanumGothic; font-size: 14px; line-height: 1.5; color: #ffffff; letter-spacing: 0.1em;}
-#inner .demowrap .demo .source .hljs-tag {color: #569cd6;}
-#inner .demowrap .demo .source .hljs-attr {color: #9cdcfe;}
-#inner .demowrap .demo .source .hljs-string {color: #ce723b;}
-#inner .demowrap .demo .source .hljs-number {color: #b5cea8;}
-#inner .demowrap .demo .source .hljs-selector-id {color: #d7983d;}
-#inner .demowrap .demo .source .hljs-selector-class {color: #d7983d;}
-#inner .demowrap .demo .source .hljs-selector-tag {color: #d7983d;}
-#inner .demowrap .demo .source .hljs-attribute {color: #9cdcfe;}
-#inner .demowrap .demo .source .hljs-keyword {color: #569cd6;}
-#inner .demowrap .demo .source .hljs-literal {color: #569cd6;}
-#inner .demowrap .demo .source .hljs-subst {color: #569cd6;}
-</style>
-    <div id="outer">
-        <div id="inner">
-            <h1>kronos Date Picker Plugin Examples</h1>
-            <div class="jquery-script-ads"><script type="text/javascript"><!--
-google_ad_client = "ca-pub-2783044520727903";
-/* jQuery_demo */
-google_ad_slot = "2780937993";
-google_ad_width = 728;
-google_ad_height = 90;
-//-->
-</script>
-<style>
-.time-slot {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 300px;
-    height: 50px;
-    background: #f5f5f5;
-    margin-bottom: 10px;
-    cursor: pointer;
-    position: absolute;
-    top: 160px;
-    right: 150px;
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
-.slot{
-    width: 150px;
-    height: 50px;
-    background: #dcdfe0;
-    color: #000000;
-    text-align: center;
-    line-height: 50px;
-    border-radius: 5px;
-    margin-right: 10px;
-    margin-top: 5px;
-}
- .active{
-    background: #1D334E;
-    color: #ffffff;
-}
-</style>
-<script type="text/javascript"
-src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script></div>
-            <section class="demowrap">
-                <section class="demo">
-                    <div class="desc">
-                        <h3 class="tit"> <span id="show-date"></span></h3>
-                    </div>
-                    <div class="cont" style="position: relative;">
-                        <!-- <input type="text" id="kronos" style="width: 200px;"> -->
-                        <div id="kronos" style="width: 200px;"></div>
-                        <input type="hidden" id="date-store">
-                        <div class="test time-slot" style="">
-                            <div>
-                                <div class="slot active" data-time="10:00 - 10:30">10:00 - 10:30</div>
-                                <div class="slot" data-time="11:00 - 11:30">11:00 - 11:30</div>
-                                <div class="slot" data-time="12:00 - 12:30">12:00 - 12:30</div>
-                                <div class="slot" data-time="01:00 - 01:30">01:00 - 01:30</div>
-                                <div class="slot" data-time="02:00 - 02:30">02:00 - 02:30</div>
-                                <div class="slot" data-time="03:00 - 03:30">03:00 - 03:30</div>
-                            </div>
-                            <div>
-                                <div class="slot" data-time="10:30 - 11:00">10:30 - 11:00</div>
-                                <div class="slot" data-time="11:30 - 12:00">11:30 - 12:00</div>
-                                <div class="slot" data-time="12:30 - 01:00">12:30 - 01:00</div>
-                                <div class="slot" data-time="01:30 - 02:00">01:30 - 02:00</div>
-                                <div class="slot" data-time="02:30 - 03:00">02:30 - 03:00</div>
-                                <div class="slot" data-time="03:30 - 04:00">03:30 - 04:00</div>
-                            </div>
-                        </div>
-                        <script>
-                            $('#kronos').kronos({
-                                visible: true,
-                                onChange: function(date) {
-                                    $("#date-store").val(date);
-                                    $(".test").show();
-                                    $("#kronos").val("");
-                                    const year = date.slice(0, 4);
-                                    const month = date.slice(4, 6);
-                                   const day = date.slice(6, 8);
+.ui-datepicker-month, .ui-datepicker-year{
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
 
-                                  const formattedDate = `${year}-${month}-${day}`;
-                                  const dt = new Date(formattedDate);
-                                  $("#show-date").text(dt.toDateString());
+}
+.ui-datepicker-prev:hover,
+.ui-datepicker-next:hover {
+    background: none !important;  /* Remove the background on hover */
+    border: none !important;      /* Remove any border on hover */
+}
+.ui-datepicker-calendar{
+            font-family: "Montserrat", sans-serif !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+}
+        .display-date-time{
+            position: absolute;
+            font-family: "Montserrat", sans-serif;
+            top:-150px;
+            left: 10%;
+            font-weight: 500;
+            font-size: 16px;
+            color:#0F1316;
+        }
+        .selected-date{
+            margin-right: 10px;
+        }
+        .time-slot-wrapper {
+        align-items: center;
+        width: 365px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        position: absolute;
+        top: 285px;
+        right: 400px;
+        }
+      .time-slot {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+      }
+      .slot {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        width: 120px;
+        height: 42px;
+        background: #f3f3f3;
+        color: #3C3C3C;
+        text-align: center;
+        line-height: 38px;
+        border-radius: 5px;
+        margin-right: 10px;
+        margin-top: 5px;
+      }
+      .active {
+        background: #1d334e;
+        color: #ffffff;
+      }
+      .ui-widget.ui-widget-content {
+        border: none;
+        width: 100%;
+        margin: 150px auto;
+      }
+      .ui-datepicker {
+        width: 365px !important;
+        height: 400px !important;
+      }
+      .ui-widget-header {
+        background: none !important;
+        border: none !important;
+      }
+      .ui-datepicker-next span,
+      .ui-datepicker-prev span {
+        display: none !important;
+      }
+      .ui-datepicker-prev {
+        background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNiIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDYgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik01IDlMMS43MDcxMSA1LjcwNzExQzEuMzczNzcgNS4zNzM3NyAxLjIwNzExIDUuMjA3MTEgMS4yMDcxMSA1QzEuMjA3MTEgNC43OTI4OSAxLjM3Mzc3IDQuNjI2MjMgMS43MDcxMSA0LjI5Mjg5TDUgMSIgc3Ryb2tlPSIjNzg4NTkxIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=")
+          no-repeat center center;
+        width: 20px; /* Adjust to match your icon size */
+        height: 20px; /* Adjust to match your icon size */
+        text-indent: -9999px; /* Hides the default text */
+      }
 
-                                }
-                            });
-                            $(".slot").on("click", function(){
-                                 var time = $(this).data("time");
-                               //  $(".test").hide();
-                              //   $(".time-slot").hide();
-                                 let ad = $("#show-date").text();
-                                 $("#show-date").text(`${ad} ${time}`);
-                                 $("#kronos").val(time);
-                                 $("#date-store").val("");
+      .ui-datepicker-next, .ui-datepicker-next:hover {
+        background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNiIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDYgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xIDlMNC4yOTI4OSA1LjcwNzExQzQuNjI2MjMgNS4zNzM3NyA0Ljc5Mjg5IDUuMjA3MTEgNC43OTI4OSA1QzQuNzkyODkgNC43OTI4OSA0LjYyNjIzIDQuNjI2MjMgNC4yOTI4OSA0LjI5Mjg5TDEgMSIgc3Ryb2tlPSIjNzg4NTkxIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=")
+          no-repeat center center;
+      }
+      .ui-datepicker td span,
+      .ui-datepicker td a {
+        width: 42px !important;
+        height: 42px !important;
+        display: flex;
+        justify-content: center; /* Centers horizontally */
+        align-items: center; /* Centers vertically */
+        border-radius: 4px;
+        margin: 2px;
+      }
+      .ui-datepicker td a {
+        background: #f3f3f3 !important;
+        border: none !important;
+        color: #3c3c3c !important;
+      }
+      .ui-datepicker td span {
+        background: none !important;
+        border: none !important;
+        color: #999999 !important;
+      }
+      .booked span {
+        color: #3c3c3c;
+      }
+      .ui-datepicker-calendar tbody tr td {
+        border-radius: 5px !important;
+      }
+      .ui-datepicker-current-day .ui-state-active {
+        background: #1d334e !important;
+        color: #ffffff !important;
+      }
+      .ui-state-hover {
+        background: none !important;
+        border: none !important;
+        color: #788591 !important;
+        cursor: pointer;
+      }
+    </style>
+    <script>
+        $(".ui-datepicker-next").on("mouseenter", function(){
+           $(".ui-datepicker-next").removeClass('ui-datepicker-next-hover ui-state-hover');
+        });
+      $(".selected-date").text(getFormattedDate());
+      $(".slot").on("click", function(e) {
                                  $(".slot").removeClass("active");
                                  $(this).addClass("active");
- 
-                            });
-                        </script>
-                    </div>
-                </section>
-      
-  
-            </section>
-        </div>
-        <script>
-            $(document).ready(function () {
-                $.ajax({
-                    url: 'index.html',
-                    timeout: 10000,
-                    dataType: 'html',
-                    success: function (data) {
-                        $(data).find('section.demo').each(function (i) {
-                            var code = $(this).children().eq(1).html();
-                            var $pre = $('<pre class="source"><code></code></pre>').appendTo($('section.demo').eq(i)).children('code');
+          let date = $(this).data("time");
+          $(".selected-time").empty();
+          $(".selected-time").text(date);
+          console.log(date);
+      });
+      $("#datepicker").datepicker({
+        onSelect: function(dateText) {
+                    console.log("Selected date: " + dateText);
+                   let date_format = getFormattedDate(dateText);
+                    $(".selected-date").empty();
+                    $(".selected-date").text(date_format);
+                },
+        firstDay: 1,
+        showOtherMonths: true,
+        dayNamesMin: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"],
+        prevText: "", // Set this to empty or any custom text
+        nextText: "",
+        beforeShowDay: function (date) {
+          var bookedDates = ["2024-09-12", "2024-09-10"]; // Example booked dates
+          var formattedDate = $.datepicker.formatDate("yy-mm-dd", date);
 
-                            code = code.replace(/</gi, '&lt;').replace(/>/gi, '&gt;');
-                            code = code.substring(code.indexOf('\n') + 1);
-                            code = code.substring(code.lastIndexOf('\n') + 1, -1);
-                            var between = code.split('\n')[0].split(' ').length;
-                            var newCode = [];
+          if (bookedDates.indexOf(formattedDate) !== -1) {
+            return [false, "booked", "This date is booked"]; // Disable and mark booked dates
+          }
+          return [true]; // Enable other dates
+        },
+      });
+      function getFormattedDate(dateString = null) {
+        //const date = new Date();
+        const date = dateString ? new Date(dateString) : new Date();
 
-                            code.split('\n').forEach(function (self) {
-                                self = self.replace(self.substring(0, between - 5), '');
-                                newCode += '\n' + self;
-                            });
+        const dayNames = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        const monthNames = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
 
-                            newCode = newCode.substring(newCode.indexOf('\n') + 1);
-                            newCode = newCode.substring(newCode.lastIndexOf('\n') + 1, -1);
+        const day = date.getDate();
+        const dayName = dayNames[date.getDay()];
+        const monthName = monthNames[date.getMonth()];
+        const suffix = getDaySuffix(day);
 
-                            $pre.html(newCode);
-                        }).promise().done(function () {
-                            $('pre > code').each(function () {
-                                hljs.highlightBlock(this);
-                            });
-                        });
-                    }
-                });
-            });
-        </script>
-    </div>
-    <script type="text/javascript">
+        return `${dayName}, ${monthName} ${day}${suffix}`;
+      }
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-</body>
+      function getDaySuffix(day) {
+        if (day > 3 && day < 21) return "th"; // Special case for 11th, 12th, 13th
+        switch (day % 10) {
+          case 1:
+            return "st";
+          case 2:
+            return "nd";
+          case 3:
+            return "rd";
+          default:
+            return "th";
+        }
+      }
+    </script>
+  </body>
 </html>
