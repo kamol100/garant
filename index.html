@@ -56,12 +56,6 @@
         font-optical-sizing: auto;
         font-style: normal;
       }
-      .close {
-        display: flex;
-        justify-content: right;
-        padding: 5px;
-        cursor: pointer;
-      }
       .date-picker-wrapper {
         width: 768px;
         margin: 100px auto;
@@ -202,7 +196,16 @@
         color: #788591 !important;
         cursor: pointer;
       }
+      .close {
+        display: none;
+      }
       @media (max-width: 768px) {
+        .close {
+          display: flex !important;
+          justify-content: right;
+          padding: 5px;
+          cursor: pointer;
+        }
         .date-picker-wrapper {
           width: 375px;
         }
@@ -222,7 +225,7 @@
           height: 50px;
           line-height: 50px;
         }
-        .ui-dialog-titlebar-close{
+        .ui-dialog-titlebar-close {
           display: none !important;
         }
       }
@@ -231,7 +234,7 @@
       $(document).ready(function () {
         $(".close").click(function () {
           $(".time-slot-wrapper").dialog("close");
-        })
+        });
         $(".selected-date").text(getFormattedDate());
         $(".slot").on("click", function (e) {
           $(".slot").removeClass("active");
