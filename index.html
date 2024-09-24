@@ -24,6 +24,7 @@
       <div class="date-picker">
         <div id="datepicker"></div>
         <div class="test time-slot-wrapper popup">
+          <div class="close">X</div>
           <div class="display-date-time">
             <span class="selected-date"></span>
             <span class="selected-time"></span>
@@ -54,6 +55,12 @@
         font-family: "Montserrat", sans-serif;
         font-optical-sizing: auto;
         font-style: normal;
+      }
+      .close {
+        display: flex;
+        justify-content: right;
+        padding: 5px;
+        cursor: pointer;
       }
       .date-picker-wrapper {
         width: 768px;
@@ -197,12 +204,12 @@
       }
       @media (max-width: 768px) {
         .date-picker-wrapper {
-          width: 380px;
+          width: 375px;
         }
         .time-slot-wrapper {
           display: none;
           background: white !important;
-          top: -49px;
+          top: -150px;
           width: 340px !important;
           left: -68px;
         }
@@ -215,100 +222,107 @@
           height: 50px;
           line-height: 50px;
         }
+        .ui-dialog-titlebar-close{
+          display: none !important;
+        }
       }
     </style>
     <script>
-      $(".selected-date").text(getFormattedDate());
-      $(".slot").on("click", function (e) {
-        $(".slot").removeClass("active");
-        $(this).addClass("active");
-        let date = $(this).data("time");
-        $(".selected-time").empty();
-        $(".selected-time").text(date);
-        console.log(date);
-      });
-      $("#datepicker").datepicker({
-        onSelect: function (dateText) {
-          console.log("Selected date: " + dateText);
-          let date_format = getFormattedDate(dateText);
-          $(".selected-date").empty();
-          $(".selected-date").text(date_format);
-          if ($(window).width() < 768) {
-            $(".time-slot-wrapper").dialog({
-              show: {
-                effect: "blind",
-                duration: 1000,
-              },
-              hide: {
-                effect: "explode",
-                duration: 1000,
-              },
-            });
-          }
-        },
-        firstDay: 1,
-        showOtherMonths: true,
-        dayNamesMin: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"],
-        prevText: "",
-        nextText: "",
-        beforeShowDay: function (date) {
-          var bookedDates = ["2024-09-12", "2024-09-10"];
-          var formattedDate = $.datepicker.formatDate("yy-mm-dd", date);
+      $(document).ready(function () {
+        $(".close").click(function () {
+          $(".time-slot-wrapper").dialog("close");
+        })
+        $(".selected-date").text(getFormattedDate());
+        $(".slot").on("click", function (e) {
+          $(".slot").removeClass("active");
+          $(this).addClass("active");
+          let date = $(this).data("time");
+          $(".selected-time").empty();
+          $(".selected-time").text(date);
+          console.log(date);
+        });
+        $("#datepicker").datepicker({
+          onSelect: function (dateText) {
+            let date_format = getFormattedDate(dateText);
+            $(".selected-date").empty();
+            $(".selected-date").text(date_format);
+            if ($(window).width() < 768) {
+              $(".time-slot-wrapper").dialog({
+                show: {
+                  effect: "blind",
+                  duration: 1000,
+                },
+                hide: {
+                  effect: "explode",
+                  duration: 1000,
+                },
+              });
+            }
+          },
+          firstDay: 1,
+          showOtherMonths: true,
+          dayNamesMin: ["Sø", "Ma", "Ti", "On", "To", "Fr", "Lø"],
+          prevText: "",
+          nextText: "",
+          beforeShowDay: function (date) {
+            var bookedDates = ["2024-09-12", "2024-09-10"];
+            var formattedDate = $.datepicker.formatDate("yy-mm-dd", date);
 
-          if (bookedDates.indexOf(formattedDate) !== -1) {
-            return [false, "booked", "This date is booked"];
-          }
-          return [true];
-        },
-      });
-      function getFormattedDate(dateString = null) {
-        const date = dateString ? new Date(dateString) : new Date();
+            if (bookedDates.indexOf(formattedDate) !== -1) {
+              return [false, "booked", "This date is booked"];
+            }
+            return [true];
+          },
+        });
+        function getFormattedDate(dateString = null) {
+          const date = dateString ? new Date(dateString) : new Date();
 
-        const dayNames = [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ];
-        const monthNames = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ];
+          const dayNames = [
+            "Søndag",
+            "Mandag",
+            "Tirsdag",
+            "Onsdag",
+            "Torsdag",
+            "Fredag",
+            "Lørdag",
+          ];
+          const monthNames = [
+            "Januar",
+            "Februar",
+            "Marts",
+            "April",
+            "Maj",
+            "Juni",
+            "Juli",
+            "August",
+            "September",
+            "Oktober",
+            "November",
+            "December",
+          ];
 
-        const day = date.getDate();
-        const dayName = dayNames[date.getDay()];
-        const monthName = monthNames[date.getMonth()];
-        const suffix = getDaySuffix(day);
+          const day = date.getDate();
+          const dayName = dayNames[date.getDay()];
+          const monthName = monthNames[date.getMonth()];
+          const suffix = getDaySuffix(day);
 
-        return `${dayName}, ${monthName} ${day}${suffix}`;
-      }
-
-      function getDaySuffix(day) {
-        if (day > 3 && day < 21) return "th"; // Special case for 11th, 12th, 13th
-        switch (day % 10) {
-          case 1:
-            return "st";
-          case 2:
-            return "nd";
-          case 3:
-            return "rd";
-          default:
-            return "th";
+          return `${dayName}, ${monthName} ${day}${suffix}`;
         }
-      }
+
+        function getDaySuffix(day) {
+          if (day > 3 && day < 21) return "th"; // Special case for 11th, 12th, 13th
+          switch (day % 10) {
+            case 1:
+              return "st";
+            case 2:
+              return "nd";
+            case 3:
+              return "rd";
+            default:
+              return "th";
+          }
+        }
+      });
     </script>
   </body>
 </html>
